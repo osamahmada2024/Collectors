@@ -13,7 +13,7 @@ Run locally:
 
 ```powershell
 python -m pip install -r requirements.txt
-python collector.py
+python Collector_Agent_SignalR.py
 ```
 
 To run on Railway, set `TRACEE_LOG_FILE` to the file path available inside the

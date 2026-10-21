@@ -11,4 +11,4 @@ RUN pip install --no-cache-dir -r requirements.txt
 
 COPY . .
 
-CMD ["python", "collector.py"]
+CMD ["python", "Collector_Agent_SignalR.py"]
