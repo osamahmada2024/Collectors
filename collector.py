@@ -15,7 +15,7 @@ HUB_METHOD = os.getenv("SIGNALR_HUB_METHOD", "sendLog").strip() or "sendLog"
 LOG_FILE = Path(
     os.getenv(
         "TRACEE_LOG_FILE",
-        str(Path(__file__).parent / "data" / "tracee-events.json"),
+        r"C:\Users\osama\Downloads\38833FF26BA1D.UnigramPreview_g9c9v27vpyspw!App\tracee-events.json",
     )
 )
 RECONNECT_WAIT_SECONDS = 3
