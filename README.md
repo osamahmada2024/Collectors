@@ -25,3 +25,5 @@ different file path.
 
 Optional variables: `TRACEE_LOG_FILE`, `SIGNALR_HUB_URL`,
 `SIGNALR_HUB_METHOD`, and `LOG_LEVEL`.
+
+The agent sends the complete source event as `rawEvent` alongside normalized fields. Set `SIGNALR_HUB_URL=http://localhost:5086/logs` for the local stack. The backend acknowledges after persistence and queues the SOC AI workflow separately, so AI response latency does not block log ingestion.
