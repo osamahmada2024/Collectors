@@ -47,7 +47,7 @@ Description=SOC Tracee sensor (eBPF event stream)
 After=network.target
 
 [Service]
-ExecStart=/usr/local/bin/tracee --events execve,openat,connect,magic_write,security_file_open --output json
+ExecStart=/usr/local/bin/tracee --events execve,connect,magic_write --output json
 StandardOutput=append:${LOG_FILE}
 StandardError=journal
 Restart=on-failure
