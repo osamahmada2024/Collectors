@@ -91,12 +91,8 @@ source = source.replace(
     'HUB_METHOD  = os.environ.get("HUB_METHOD", "sendLog")',
 )
 source = source.replace(
-    'LOG_FILE    = os.path.join(os.path.dirname(os.path.abspath(__file__)),',
-    'LOG_FILE    = os.environ.get("LOG_FILE", os.path.join(os.path.dirname(os.path.abspath(__file__))),',
-)
-source = source.replace(
-    '                           "tracee-events.json")',
-    '                           "tracee-events.json"))',
+    'LOG_FILE    = os.path.join(os.path.dirname(os.path.abspath(__file__)),\n                           "tracee-events.json")',
+    'LOG_FILE    = os.environ.get("LOG_FILE", os.path.join(os.path.dirname(os.path.abspath(__file__)), "tracee-events.json"))',
 )
 path.write_text(source)
 print("collector config updated")
