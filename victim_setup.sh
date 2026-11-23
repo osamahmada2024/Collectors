@@ -29,11 +29,12 @@ apt-get install -y -qq curl ca-certificates python3 python3-pip > /dev/null
 echo "[2/5] Installing Tracee"
 if ! command -v tracee > /dev/null; then
     curl -fsSL -o /tmp/tracee.tar.gz \
-        "https://github.com/aquasecurity/tracee/releases/download/v0.20.0/tracee.tar.gz"
-    tar -xzf /tmp/tracee.tar.gz -C /tmp
-    install -m 0755 /tmp/tracee /usr/local/bin/tracee
+        "https://github.com/aquasecurity/tracee/releases/download/v0.24.1/tracee-x86_64.v0.24.1.tar.gz"
+    rm -rf /tmp/tracee-extract && mkdir -p /tmp/tracee-extract
+    tar -xzf /tmp/tracee.tar.gz -C /tmp/tracee-extract
+    install -m 0755 /tmp/tracee-extract/dist/tracee /usr/local/bin/tracee
 fi
-tracee --version || true
+tracee version 2>/dev/null || true
 
 echo "[3/5] Preparing event log directory + collector deps"
 mkdir -p "$(dirname "${LOG_FILE}")"
@@ -47,7 +48,6 @@ After=network.target
 
 [Service]
 ExecStart=/usr/local/bin/tracee --events execve,openat,connect,magic_write,security_file_open --output json
-ExecStartPost=/bin/sh -c 'exec > ${LOG_FILE} 2>/dev/null'
 StandardOutput=append:${LOG_FILE}
 StandardError=journal
 Restart=on-failure
